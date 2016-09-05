@@ -12,7 +12,7 @@ SetWorkingDir %A_ScriptDir%
 innerTitle := "; Header and/or title here"
 df := "Segoe UI"
 csf := "Lucida Console"
-asg := "AutoHotkey Script Generator"
+Global asg := "AutoHotkey Script Generator"
 
 ; Build menus, intial loops and guis here
 Gui, Color, , 0xFFFFE0
@@ -37,7 +37,7 @@ cf()
 Gui, Add, Button, x%b1x% yp-1 vb1 h24, Select Directory
 show()
 ControlGetPos, xb1a, yb1a, wb1a, hb1a, Button1, % asg
-b1width := (xb1a + wb1a)
+b1width := (xb1a + wb1a) - 10
 If (b1width < 420)
 	{
 		gap := (420 - b1width)
@@ -45,7 +45,7 @@ If (b1width < 420)
 		b1width := "420"
 		GuiControl, Move, dir, w%e3w%
 		ControlGetPos, xe3c, ye3c, we3c, he3c, Edit3, % asg
-		bgap := (xe3c + we3c)
+		bgap := (xe3c + we3c) - 7
 		GuiControl, Move, b1, x%bgap%
 	}
 e2width := b1width - 14
@@ -124,7 +124,7 @@ b6x := b2x + 4
 Gui, Add, Button, x%b6x% w%b2w% y%b6y% h64 g2gen, Generate Script
 Gui, Tab, About
 cf("14", , "000080", , "5")
-Gui, Add, Text, w%e2width%,	%	"AutoHotkey Script Generator is a small, but effecient utility "
+Gui, Add, Text, w%e2width%,	%	"AutoHotkey Script Generator is a small, but efficient utility "
 										.	"to help you create lots of AutoHotkey scripts. You can instantly "
 										.	"generate a basic universal script written by me or you can import "
 										.	"your own pre-written templates. "
@@ -151,6 +151,8 @@ funcCreateScript(dir, com, title){
 	If (com = "")
 		com := "; " title
 	fp := dir "\" title
+	IfNotExist, % fp
+		{
 	FileAppend,
 (
 %com%
@@ -182,21 +184,27 @@ Return
 
 
 ), % fp
-IfExist, % fp
-	MsgBox, 64, % asg Info, % "Your script was created successfully at:`n" fp
-Else
-	MsgBox, 16,  % asg Error, % fp 
-																. "`nwas not created. If you are trying to save to a folder"
-																. "`nyou do not own then you will need to run this program"
-																. "`nas adminstrator and try again."
+	funcCheckFiles(fp, asg)
+		}
+	Else
+		funcExists(fp)
 }
-
+funcCheckFiles(file, msgtitle){
+	IfExist, % file
+		MsgBox, 64, % msgtitle " Info", % "Your script was created successfully at:`n`n" file
+	Else
+		MsgBox, 16,  % msgtitle " Error", % file . "`nwas not created. If you are trying to save to a folder"
+														. "`nyou do not own then you will need to run this program"
+														. "`nas adminstrator and try again."		
+}
 
 funcGetTime(){
 	FormatTime, a,, MM.dd.yyyy_h.mm.ss_tt
 	Return a
 }
-
+funcExists(file){
+	MsgBox, 16, % asg " Error", % "AutoHotkey script file:`n`n" file "`n`nalready exists. Please rename the existing file or try a different name."
+}
 ; Classes
 Class Globals {
 	SetGlobal(vVar,vVal=""){
@@ -246,14 +254,19 @@ Return
 	Else
 		tdir := 2dir "\"
 	finalf := tdir name ".ahk"
-	FileRead, copy,  % file
-	FileAppend, %copy%, % finalf
+	IfNotExist, % finalf
+		{
+			FileRead, copy,  % file
+			FileAppend, %copy%, % finalf
+			funcCheckFiles(finalf, asg)
+		}
+	Else
+		funcExists(finalf)
 Return
 ButtonSelectFile:
 	FileSelectFile, file
 	SplitPath, file, , , ,fn
 	GuiControl, , imp, % file
-	;GuiControl, , iname, % fn
 Return
 GuiClose:
 Leave:
