@@ -40,9 +40,10 @@ ControlGetPos, xb1a, yb1a, wb1a, hb1a, Button1, % asg
 b1width := (xb1a + wb1a)
 If (b1width < 420)
 	{
-		gap := (420 - b1width) + 39
+		gap := (420 - b1width)
+		e3w := we3b + gap
 		b1width := "420"
-		GuiControl, Move, dir, w%gap%
+		GuiControl, Move, dir, w%e3w%
 		ControlGetPos, xe3c, ye3c, we3c, he3c, Edit3, % asg
 		bgap := (xe3c + we3c)
 		GuiControl, Move, b1, x%bgap%
