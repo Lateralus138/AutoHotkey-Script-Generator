@@ -22,8 +22,6 @@ AutoHotkey Script Generator is a small, but efficient utility to help you create
 extend =
 (
 	AHK Script Generator is, of course, written in the scripting language called AutoHotkey. For more information on the amazing scripting language that I love above all else please visit any of the links below:
-
-
 )
 ; Build menus, intial loops and guis here
 Menu, Tray, NoStandard
@@ -144,8 +142,8 @@ cf("14", , "000080", , "5")
 Gui, Add, Text, w%e2width%,	%	about extend
 cf("14", , "Red", , "5")
 Gui, Add, Link, , Official Site <a href="https://www.autohotkey.com/">AutoHotkey.com</a>
-Gui, Add, Link, , Official Forum <a href="https://autohotkey.com/boards/">AutoHotkey Forums</a>
-Gui, Add, Link, , My Blog <a href="https://techmicrocosm.blogspot.com/">The Tech Micrcosm</a>
+Gui, Add, Link,y+0 , Official Forum <a href="https://autohotkey.com/boards/">AutoHotkey Forums</a>
+Gui, Add, Link,y+0 , My Blog <a href="https://techmicrocosm.blogspot.com/">The Tech Micrcosm</a>
 Gui, Show, w%fwidth% h%fheight%, % asg
 
 ; End auto execute
