@@ -13,10 +13,16 @@ innerTitle := "; Header and/or title here"
 df := "Segoe UI"
 csf := "Lucida Console"
 Global asg := "AutoHotkey Script Generator"
+about =
+(
+AutoHotkey Script Generator is a small, but efficient utility to help you create lots of AutoHotkey scripts. You can instantly generate a basic universal script written by me or you can import your own pre-written templates.
+)
 
 ; Build menus, intial loops and guis here
 Menu, Tray, NoStandard
 Menu, Tray, Add, Reload, Rld
+Menu, Tray, Add, About AHK Script Generator, Abt
+Menu, Tray, Add
 Menu, Tray, Add, Exit, Leave
 
 Gui, Color, , 0xFFFFE0
@@ -128,10 +134,7 @@ b6x := b2x + 4
 Gui, Add, Button, x%b6x% w%b2w% y%b6y% h64 g2gen, Generate Script
 Gui, Tab, About
 cf("14", , "000080", , "5")
-Gui, Add, Text, w%e2width%,	%	"AutoHotkey Script Generator is a small, but efficient utility "
-										.	"to help you create lots of AutoHotkey scripts. You can instantly "
-										.	"generate a basic universal script written by me or you can import "
-										.	"your own pre-written templates. "
+Gui, Add, Text, w%e2width%,	%	about
 Gui, Show, w%fwidth% h%fheight%, % asg
 
 ; End auto execute
@@ -225,6 +228,9 @@ Class Globals {
 }
 
 ; Subs
+Abt:
+	MsgBox, 64, AHK Script Generator Info, % about
+Return
 Rld:
 	Reload
 Return
