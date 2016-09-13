@@ -15,6 +15,10 @@ csf := "Lucida Console"
 Global asg := "AutoHotkey Script Generator"
 
 ; Build menus, intial loops and guis here
+Menu, Tray, NoStandard
+Menu, Tray, Add, Reload, Rld
+Menu, Tray, Add, Exit, Leave
+
 Gui, Color, , 0xFFFFE0
 Gui, Add, Tab3, w500 h600 vtaba, Create Script|Import Template|About
 Gui, Tab, Create Script
@@ -134,7 +138,7 @@ Gui, Show, w%fwidth% h%fheight%, % asg
 Return
 
 ; Hotkeys
-!r::Reload
+!r::Gosub, Rld
 
 ; Functions
 show(){
@@ -221,6 +225,9 @@ Class Globals {
 }
 
 ; Subs
+Rld:
+	Reload
+Return
 ButtonSelectDirectory:
 	DriveGet, a, list
 	Loop, Parse, a
