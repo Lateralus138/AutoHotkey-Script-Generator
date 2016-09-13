@@ -15,14 +15,15 @@ script files from a basic template or you can import your own. This is best used
     Ian Pride - Lateralus138
 
 ## License
-    GNU GENERAL PUBLIC LICENSE - Provided in LICENSE file
-    Version 3, 29 June 2007
+                    GNU GENERAL PUBLIC LICENSE
+                       Version 2, June 1991
 
- Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
+ Copyright (C) 1989, 1991 Free Software Foundation, Inc.,
+ 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  Everyone is permitted to copy and distribute verbatim copies
  of this license document, but changing it is not allowed.
 
-Preamble
+                            Preamble
 
-The GNU General Public License is a free, copyleft license for
-software and other kinds of works...
+  The licenses for most software are designed to take away your
+freedom to share and change it...
