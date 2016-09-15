@@ -160,8 +160,12 @@ cf(size := "10", font := "Segoe UI", color := "Black", weight := "400", qty := "
 	Gui, Font, s%size% c%color% w%weight% q%qty%, % font 
 }
 funcCreateScript(dir, com, title){
-	title:=title?title ".ahk":"AutoHotkey_" funcGetTime() ".ahk"
-	com:=com?com:"; " title
+	If (title = "")
+		title := "AutoHotkey_" funcGetTime() ".ahk"
+	Else
+		title := title ".ahk"
+	If (com = "")
+		com := "; " title
 	fp := dir "\" title
 	IfNotExist, % fp
 		{
@@ -263,8 +267,14 @@ ButtonGenerateScript:
 Return
 2gen:
 	Gui, Submit, NoHide
-	name:=iname?iname:fn
-	tdir:=2dir?2dir "\":A_WorkingDir "\"
+	If iname
+		name := iname
+	Else
+		name := fn
+	If !2dir
+		tdir := A_WorkingDir "\"
+	Else
+		tdir := 2dir "\"
 	finalf := tdir name ".ahk"
 	IfNotExist, % finalf
 		{
